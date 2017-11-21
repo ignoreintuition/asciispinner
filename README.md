@@ -1,14 +1,33 @@
-# asciispinner
+# Ascii Spinner
+
+Ascii Spinner is a simple spinner that you can add to any application to indicate progress with very little overhead.  
 
 How to use:
 
 ```JavaScript
-el = document.getElementById('output')
-var s = new Spinner(el, 1); 
-s.stop();
+var el = document.getElementById('output1')
+var s = new Spinner(0, appendSpinner);
+
+function appendSpinner(s){
+  el.innerHTML = s;
+}
+
+document.getElementById('startBtn').addEventListener('click', function(){
+  s.start();
+})
+
+document.getElementById('stopBtn').addEventListener('click', function(){
+  s.stop();
+})
 ```
-Parameter 1 is the element to bind the spinner to
-Parameter 2 is the index for the type of spinner:
-0: round spinner
-1: Vericle rectangular spinner
-2: Horizonal rectangular spinner
+
+Spinner object takes two parameters:
+
+1st Parameter: Spinner type
+* 0: round spinner
+* 1: Vertical rectangular spinner
+* 2: Horizontal rectangular spinner
+
+2nd Parameter: function to pass the spinner
+
+Once the spinner is created it can be toggled on and off using the start and stop function
