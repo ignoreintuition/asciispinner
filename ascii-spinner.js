@@ -1,34 +1,28 @@
-function Spinner(el, type) {
-  var currFrame = 0,
-    spinner = [
+function Spinner(type, fn) {
+  var frame = 0,
+    spinnerType = [
       ['◐', '◓', '◑', '◒'],
       ['▁', '▃', '▄', '▅', '▆', '▇', '█'],
       ['▏', '▎', '▍', '▌', '▋', '▊', '▉']
-    ]
-  active = true,
-  stopEvent = new Event('stop'),
-	startEvent = new Event('start');
+    ],
+    spinner = null;
 
-  el.addEventListener('stop', e => active = false, false);
-	el.addEventListener('start', e => active = true, false);
-
-  var _stop = function() {
-    el.dispatchEvent(stopEvent)
+  var _stop = () => {
+    fn('')
+    clearInterval(spinner);
+    spinner = null;
   }
 
-  var _start = function() {
-    el.dispatchEvent(startEvent)
+  var _start = () => {
+    if (spinner) return 0;
+    spinner = setInterval(() => {
+      frame = (frame + 1) % spinnerType[type].length;
+      fn(spinnerType[type][frame]);
+    }, 250);
   }
-
-  setInterval(() => {
-    if (active) {
-      currFrame = (currFrame + 1) % spinner[type].length;
-      el.innerHTML = spinner[type][currFrame];
-    } else return 0;
-  }, 250);
 
   return {
     stop: _stop,
 		start: _start
-  }
+  };
 };
