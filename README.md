@@ -1,5 +1,7 @@
 # Ascii Spinner
 
+What a fabulous spinner. 
+
 Ascii Spinner is a simple spinner that you can add to any application to indicate progress with very little overhead.  
 
 How to use:
